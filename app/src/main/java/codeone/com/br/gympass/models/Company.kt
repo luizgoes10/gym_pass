@@ -15,6 +15,9 @@ data class Company(
 
         var name:String,
 
+        @SerializedName("opening_hours")
+        var openingHours:OpenNow,
+
         var photos:MutableList<Photos>,
 
         @SerializedName("place_id")
