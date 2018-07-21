@@ -111,18 +111,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         pbRecyclerCompany.visibility = View.GONE
     }
 
-    override fun onSwipeLoadItems() {
-        srCompany.isRefreshing = true
-    }
 
     override fun onSwipeCompleteLoadItems() {
         srCompany.setOnRefreshListener {
 
-            presenter.taskFeaturesNearBySearch( "-25.431936,-49.3383357",
-                    "50000",
-                    "motel",
-                    "motel",
-                    BaseUrl.API_KEY)
+            srCompany.isRefreshing = false
         }
     }
 

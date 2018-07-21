@@ -14,7 +14,6 @@ open class MainActivityPresenter(val viewCallBack: ViewCallBack) {
     interface ViewCallBack{
 
         fun setUpRecycler()
-        fun onSwipeLoadItems()
         fun onSwipeCompleteLoadItems()
         fun showProgressView()
         fun hideProgressView()
@@ -36,7 +35,6 @@ open class MainActivityPresenter(val viewCallBack: ViewCallBack) {
     }
     open fun taskFeaturesNearBySearch(location:String,radius:String,type:String,keyword:String,key:String){
         //Programação reativa -> padrão observador
-        var teste = location
         Observable.fromCallable{ServiceApi.getFeaturesNearBySearch(location,radius,type,keyword,key)}
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -45,6 +43,7 @@ open class MainActivityPresenter(val viewCallBack: ViewCallBack) {
                         return@subscribeBy
                     }
                     viewCallBack.hideProgressView()
+                    viewCallBack.onSwipeCompleteLoadItems()
                     viewCallBack.setFeaturesNearBySearch(it.results)
                 }
 
