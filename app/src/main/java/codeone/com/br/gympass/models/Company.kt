@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Company(
         //Testar esse mapeamento
-        var geometry:Array<String>,
+        var geometry:Geometry,
 
         var icon:String,
 
@@ -15,14 +15,14 @@ data class Company(
 
         var name:String,
 
-        var photos:Array<Photos>,
+        var photos:MutableList<Photos>,
 
         @SerializedName("place_id")
         var placeId:String,
 
         //Testar esse mapeamento
         @SerializedName("plus_code")
-        var plusCode:Array<String>,
+        var plusCode:PlusCode,
 
         var rating:Double,
 

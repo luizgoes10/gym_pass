@@ -1,6 +1,7 @@
 package codeone.com.br.gympass.models
 
 import android.os.Parcelable
+import codeone.com.br.gympass.api.BaseUrl
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
@@ -8,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 data class Photos(
         var height:Int,
 
-        @SerializedName("html_attribution")
+        @SerializedName("html_attributions")
         var htmlAttribution:Array<String>,
 
         @SerializedName("photo_reference")
@@ -16,4 +17,6 @@ data class Photos(
 
         var width:Int
 ):Parcelable {
+       fun imgReference() : String = BaseUrl.PHOTO + "maxwidth=120&maxheight=150&photoreference=" + photoReference + "&key=" + BaseUrl.API_KEY
+
 }

@@ -6,18 +6,26 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import codeone.com.br.gympass.R
+import codeone.com.br.gympass.adpters.CompanyAdpter
+import codeone.com.br.gympass.api.BaseUrl
+import codeone.com.br.gympass.models.Company
 import codeone.com.br.gympass.models.Features
 import codeone.com.br.gympass.presenters.MainActivityPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_company.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
         MainActivityPresenter.ViewCallBack {
 
     private val presenter:MainActivityPresenter by lazy { MainActivityPresenter(this) }
+    private var adapter:CompanyAdpter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,10 +99,45 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun setUpRecycler() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        rvCompany.layoutManager = LinearLayoutManager(this)
+        rvCompany.itemAnimator = DefaultItemAnimator()
     }
 
-    override fun setFeaturesNearBySearch(features: MutableList<Features>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showProgressView() {
+        pbRecyclerCompany.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressView() {
+        pbRecyclerCompany.visibility = View.GONE
+    }
+
+    override fun onSwipeLoadItems() {
+        srCompany.isRefreshing = true
+    }
+
+    override fun onSwipeCompleteLoadItems() {
+        srCompany.setOnRefreshListener {
+
+            presenter.taskFeaturesNearBySearch( "-25.431936,-49.3383357",
+                    "50000",
+                    "motel",
+                    "motel",
+                    BaseUrl.API_KEY)
+        }
+    }
+
+    override fun setFeaturesNearBySearch(company: MutableList<Company>) {
+        rvCompany.visibility = View.VISIBLE
+        if(adapter == null){
+            adapter = CompanyAdpter(this, company, onClickItem())
+            rvCompany.adapter = adapter
+        }else{
+            adapter?.setList(company)
+            adapter?.notifyDataSetChanged()
+        }
+    }
+
+    private fun onClickItem():(Company) -> Unit = {
+        company ->  presenter.clickedItem(company)
     }
 }

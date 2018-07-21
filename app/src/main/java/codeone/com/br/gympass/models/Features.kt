@@ -6,9 +6,13 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Features(
+
         @SerializedName("html_attributions")
-        var htmlAttributions: Array<String>,
+        var htmlAttributions: MutableList<String>,
+
         @SerializedName("next_page_token")
         var nextPageToken:String,
-        var result:Array<Company>
+
+        var results:MutableList<Company>
+
 ) : Parcelable
