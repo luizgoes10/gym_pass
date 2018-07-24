@@ -10,7 +10,7 @@ data class Details(
         @SerializedName("html_attributions")
         var htmlAttributions:MutableList<String>,
 
-        var result: MutableList<CompanyDetails>,
+        var result: CompanyDetails,
 
         var status:String
 

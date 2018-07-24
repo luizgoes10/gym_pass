@@ -26,7 +26,7 @@ data class Reviews(
 
         var text:String,
 
-        var time:Date
+        var time:Int
 
 ) :Parcelable{
 }

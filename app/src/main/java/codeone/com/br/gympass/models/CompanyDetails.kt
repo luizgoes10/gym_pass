@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class CompanyDetails(
 
+        @SerializedName("address_components")
         var result:MutableList<AddressComponents>,
 
         @SerializedName("adr_address")

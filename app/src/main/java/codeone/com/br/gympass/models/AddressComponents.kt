@@ -13,7 +13,7 @@ data class AddressComponents(
         @SerializedName("short_name")
         var shortName:String,
 
-        var types:MutableList<String>
+         var types:Array<String>
 
 ):Parcelable {
 }
