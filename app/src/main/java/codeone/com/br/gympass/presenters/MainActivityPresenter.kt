@@ -4,7 +4,9 @@ import android.os.Bundle
 import codeone.com.br.gympass.api.BaseUrl
 import codeone.com.br.gympass.api.services.ServiceApi
 import codeone.com.br.gympass.models.Company
+import codeone.com.br.gympass.models.Details
 import codeone.com.br.gympass.models.Features
+import codeone.com.br.gympass.utils.BundlesConstants
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -18,6 +20,7 @@ open class MainActivityPresenter(val viewCallBack: ViewCallBack) {
         fun showProgressView()
         fun hideProgressView()
         fun setFeaturesNearBySearch(company:MutableList<Company>)
+        fun showActivityDetails(params:Pair<String, Any>)
     }
     fun onViewCreated(){
         viewCallBack.showProgressView()
@@ -52,5 +55,7 @@ open class MainActivityPresenter(val viewCallBack: ViewCallBack) {
 
     fun clickedItem(company: Company) {
         val bundle = Bundle()
+        bundle.putParcelable(BundlesConstants.COMPANY_KEY, company)
+        viewCallBack.showActivityDetails(BundlesConstants.COMPANY_KEY to company)
     }
 }

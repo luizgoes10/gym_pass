@@ -11,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import codeone.com.br.gympass.R
 import codeone.com.br.gympass.models.Company
+import codeone.com.br.gympass.models.Details
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.adapter_company.view.*
 

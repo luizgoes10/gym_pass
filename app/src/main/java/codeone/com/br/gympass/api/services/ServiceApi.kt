@@ -3,7 +3,7 @@ package codeone.com.br.gympass.api.services
 import codeone.com.br.gympass.api.BaseUrl
 import codeone.com.br.gympass.api.utils.createRetrofitService
 import codeone.com.br.gympass.api.utils.exceptions.FeaturesException
-import codeone.com.br.gympass.models.Details
+import codeone.com.br.gympass.models.CompanyDetails
 import codeone.com.br.gympass.models.Features
 import retrofit2.Call
 import retrofit2.http.GET
@@ -43,7 +43,7 @@ class ServiceApi {
                 placeId:String,
                 @Query("key")
                 key:String
-        ):Call<Details>
+        ):Call<CompanyDetails>
     }
     companion object Factory{
         @Throws
@@ -71,7 +71,7 @@ class ServiceApi {
         //Falta implementar details
         @Throws
         fun getDetails(placeId: String, key: String)
-                : Details {
+                : CompanyDetails {
             val service = createRetrofitService<Retrofit>(BaseUrl.URL_DETAIL)
             val execute = service.getDetails(placeId, key).execute()
             val responseVo = execute.body()

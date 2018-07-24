@@ -15,11 +15,13 @@ import codeone.com.br.gympass.R
 import codeone.com.br.gympass.adpters.CompanyAdpter
 import codeone.com.br.gympass.api.BaseUrl
 import codeone.com.br.gympass.models.Company
+import codeone.com.br.gympass.models.Details
 import codeone.com.br.gympass.models.Features
 import codeone.com.br.gympass.presenters.MainActivityPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_company.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
         MainActivityPresenter.ViewCallBack {
@@ -130,6 +132,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    override fun showActivityDetails(params:Pair<String, Any>) {
+        startActivity<DetailsActivity>(params)
+    }
     private fun onClickItem():(Company) -> Unit = {
         company ->  presenter.clickedItem(company)
     }

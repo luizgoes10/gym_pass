@@ -51,4 +51,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
     //essa versão mudou
     implementation 'io.reactivex.rxjava2:rxjava:0.12.3-SNAPSHOT'
+
+    //Anko
+    implementation "org.jetbrains.anko:anko:0.10.4"
 }
