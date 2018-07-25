@@ -6,6 +6,7 @@ import codeone.com.br.gympass.api.BaseUrl
 import codeone.com.br.gympass.api.services.ServiceApi
 import codeone.com.br.gympass.models.Company
 import codeone.com.br.gympass.models.Details
+import codeone.com.br.gympass.models.Photos
 import codeone.com.br.gympass.utils.BundlesConstants
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,6 +21,7 @@ open class DetailsActivityPresenter(val viewCallBack:ViewCallBack) {
 
         fun setDetails(details: Details)
         fun setUpToolbar(title:String)
+        fun setUpRecycler()
         fun hideProgress()
     }
 
@@ -27,6 +29,7 @@ open class DetailsActivityPresenter(val viewCallBack:ViewCallBack) {
         //Recuperando a company pela key
         company = extras.getParcelable(BundlesConstants.COMPANY_KEY)
         viewCallBack.setUpToolbar(company.name)
+        viewCallBack.setUpRecycler()
         taskDetails(context)
     }
 
@@ -41,5 +44,10 @@ open class DetailsActivityPresenter(val viewCallBack:ViewCallBack) {
                     viewCallBack.setDetails(it)
                     viewCallBack.hideProgress()
                 })
+    }
+
+    fun clickedItem(photo: Photos) {
+        val bundle = Bundle()
+
     }
 }

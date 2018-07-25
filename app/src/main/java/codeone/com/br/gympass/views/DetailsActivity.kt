@@ -6,23 +6,29 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import codeone.com.br.gympass.R
+import codeone.com.br.gympass.adpters.PhotoAdapter
 import codeone.com.br.gympass.models.Company
 import codeone.com.br.gympass.models.CompanyDetails
 import codeone.com.br.gympass.models.Details
+import codeone.com.br.gympass.models.Photos
 import codeone.com.br.gympass.presenters.DetailsActivityPresenter
 import codeone.com.br.gympass.utils.BundlesConstants
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.app_bar_details.*
 import kotlinx.android.synthetic.main.content_details.*
+import kotlinx.android.synthetic.main.fragment_photos.*
 
 class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, DetailsActivityPresenter.ViewCallBack {
 
     private val presenter:DetailsActivityPresenter by lazy { DetailsActivityPresenter(this) }
+    private var adapter:PhotoAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,19 +103,25 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun setDetails(details: Details) {
         tNameDetails.text = details.result.name
-     /*   Picasso.with(this).load(details.result.photos[0].imgReference()).fit().into(imgDetails,
-                object : com.squareup.picasso.Callback{
-                    override fun onSuccess() {
-                        pbDetails.visibility = View.GONE
-                    }
+        rvPhotos.visibility = View.VISIBLE
+        if(adapter == null){
+            adapter = PhotoAdapter(this,details.result.photos, onClick())
+            rvPhotos.adapter = adapter
+        }else{
+            adapter?.setList(details.result.photos)
+            adapter?.notifyDataSetChanged()
+        }
 
-                    override fun onError() {
-                        pbDetails.visibility = View.GONE
-                    }
-                }
-                )*/
+
     }
 
+    private fun onClick():(Photos) -> Unit = {
+        photos ->  presenter.clickedItem(photos)
+    }
+    override fun setUpRecycler() {
+        rvPhotos.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvPhotos.itemAnimator = DefaultItemAnimator()
+    }
     override fun setUpToolbar(title: String) {
         supportActionBar?.title = title
     }
