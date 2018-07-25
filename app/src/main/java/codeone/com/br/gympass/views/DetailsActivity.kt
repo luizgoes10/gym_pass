@@ -15,6 +15,7 @@ import codeone.com.br.gympass.models.CompanyDetails
 import codeone.com.br.gympass.models.Details
 import codeone.com.br.gympass.presenters.DetailsActivityPresenter
 import codeone.com.br.gympass.utils.BundlesConstants
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.app_bar_details.*
 import kotlinx.android.synthetic.main.content_details.*
@@ -96,6 +97,17 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun setDetails(details: Details) {
         tNameDetails.text = details.result.name
+     /*   Picasso.with(this).load(details.result.photos[0].imgReference()).fit().into(imgDetails,
+                object : com.squareup.picasso.Callback{
+                    override fun onSuccess() {
+                        pbDetails.visibility = View.GONE
+                    }
+
+                    override fun onError() {
+                        pbDetails.visibility = View.GONE
+                    }
+                }
+                )*/
     }
 
     override fun setUpToolbar(title: String) {
@@ -103,6 +115,6 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun hideProgress() {
-        pbDetailsView.visibility = View.GONE
+        pbDetails.visibility = View.GONE
     }
 }
