@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.RatingBar
 import android.widget.TextView
 import codeone.com.br.gympass.R
 import codeone.com.br.gympass.models.Company
@@ -24,12 +25,14 @@ class CompanyAdpter(var context:Context, var company:List<Company>, val onClick:
         var tRating:TextView
         var photo:ImageView
         var progressBarAdapeter:ProgressBar
+        var rbRating:RatingBar
         var cardView:CardView
         init{
             tName = view.findViewById<TextView>(R.id.tName)
             tRating = view.findViewById<TextView>(R.id.tRating)
             photo = view.findViewById<ImageView>(R.id.img)
             progressBarAdapeter = view.findViewById<ProgressBar>(R.id.pbAdapterCompany)
+            rbRating = view.findViewById<RatingBar>(R.id.rbRatingMain)
             cardView = view.findViewById<CardView>(R.id.card_view_company)
         }
     }
@@ -46,6 +49,7 @@ class CompanyAdpter(var context:Context, var company:List<Company>, val onClick:
         val company = company[position]
         holder.tName.text = company.name
         holder.tRating.text = "Avaliação: " + company.rating.toString()
+        holder.rbRating.rating = company.rating.toFloat()
         holder.progressBarAdapeter.visibility = View.VISIBLE
         Picasso.with(context).load(company.photos[0].imgReference()).fit().into(holder.photo,
                 object : com.squareup.picasso.Callback{

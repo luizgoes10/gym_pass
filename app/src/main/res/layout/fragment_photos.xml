@@ -20,8 +20,10 @@
             android:dividerHeight="0dp"
             android:listSelector="@android:color/transparent"
             android:scrollbarStyle="outsideOverlay"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical"
+            tools:layout_height="wrap_content" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </FrameLayout>
+

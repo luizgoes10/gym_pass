@@ -54,4 +54,7 @@ dependencies {
 
     //Anko
     implementation "org.jetbrains.anko:anko:0.10.4"
+
+    //Google Play Services
+    implementation 'com.google.android.gms:play-services:7.0.0'
 }

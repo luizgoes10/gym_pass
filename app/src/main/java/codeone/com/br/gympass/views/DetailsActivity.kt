@@ -103,6 +103,8 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun setDetails(details: Details) {
         tNameDetails.text = details.result.name
+        tRatingDetails.text = "Avaliação: " + details.result.rating.toString()
+        rbDetails.rating = details.result.rating.toFloat()
         rvPhotos.visibility = View.VISIBLE
         if(adapter == null){
             adapter = PhotoAdapter(this,details.result.photos, onClick())
