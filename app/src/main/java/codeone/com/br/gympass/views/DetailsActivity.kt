@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import codeone.com.br.gympass.R
 import codeone.com.br.gympass.adpters.PhotoAdapter
+import codeone.com.br.gympass.fragments.MapsFragment
 import codeone.com.br.gympass.models.Company
 import codeone.com.br.gympass.models.CompanyDetails
 import codeone.com.br.gympass.models.Details
@@ -29,6 +30,7 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     private val presenter:DetailsActivityPresenter by lazy { DetailsActivityPresenter(this) }
     private var adapter:PhotoAdapter? = null
+    private var detail:Details? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +48,19 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
         presenter.onCreate(intent.extras, this)
+
     }
 
+    override fun setMapDetails(extras:Bundle) {
+
+        var map:MapsFragment = MapsFragment()
+
+        map?.arguments = extras
+
+        supportFragmentManager.beginTransaction().replace(R.id.frag_layout, map).commit()
+    }
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -102,6 +114,7 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun setDetails(details: Details) {
+        detail = details
         tNameDetails.text = details.result.name
         tRatingDetails.text = "Avaliação: " + details.result.rating.toString()
         rbDetails.rating = details.result.rating.toFloat()
@@ -128,7 +141,4 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         supportActionBar?.title = title
     }
 
-    override fun hideProgress() {
-        pbDetails.visibility = View.GONE
-    }
 }

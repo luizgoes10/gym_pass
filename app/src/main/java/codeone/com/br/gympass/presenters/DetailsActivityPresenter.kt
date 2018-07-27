@@ -22,7 +22,7 @@ open class DetailsActivityPresenter(val viewCallBack:ViewCallBack) {
         fun setDetails(details: Details)
         fun setUpToolbar(title:String)
         fun setUpRecycler()
-        fun hideProgress()
+        fun setMapDetails(extras: Bundle)
     }
 
     fun onCreate(extras: Bundle, context: Context){
@@ -42,12 +42,19 @@ open class DetailsActivityPresenter(val viewCallBack:ViewCallBack) {
                         return@subscribeBy
                     }
                     viewCallBack.setDetails(it)
-                    viewCallBack.hideProgress()
+                    viewCallBack.setMapDetails(setBundleDetails(it))
                 })
     }
 
     fun clickedItem(photo: Photos) {
         val bundle = Bundle()
 
+    }
+
+
+    private fun setBundleDetails(details: Details):Bundle{
+        val bundle = Bundle()
+        bundle.putParcelable(BundlesConstants.DETAILS_KEY, details)
+        return bundle
     }
 }

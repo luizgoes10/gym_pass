@@ -46,21 +46,14 @@
             android:layout_margin="8dp"
             android:background="#3333"/>
 
+
       <include layout="@layout/fragment_photos"/>
 
         <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ProgressBar
-                android:id="@+id/pbDetails"
-                style="@android:style/Widget.ProgressBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|center_vertical"
-                android:visibility="visible"/>
-
-        </FrameLayout>
+            android:id="@+id/frag_layout"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            tools:layout="@layout/fragment_maps"/>
 
     </LinearLayout>
 
