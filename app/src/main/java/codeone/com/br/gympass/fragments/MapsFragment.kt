@@ -12,8 +12,11 @@ import codeone.com.br.gympass.R
 import codeone.com.br.gympass.models.Company
 import codeone.com.br.gympass.models.Details
 import codeone.com.br.gympass.utils.BundlesConstants
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
@@ -37,5 +40,17 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(maps: GoogleMap?) {
         map = maps
+
+        val location = LatLng(details?.result?.geometry?.location!!.lat, details?.result?.geometry?.location!!.lng)
+
+        val update = CameraUpdateFactory.newLatLngZoom(location, 13f)
+
+        map?.moveCamera(update)
+
+        map?.addMarker(MarkerOptions()
+                .title(details!!.result.name)
+                .snippet(details!!.result.formattedAddress)
+                .position(location))
+        map?.mapType = GoogleMap.MAP_TYPE_NORMAL
     }
 }

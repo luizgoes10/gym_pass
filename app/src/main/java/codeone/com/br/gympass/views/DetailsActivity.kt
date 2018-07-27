@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import codeone.com.br.gympass.R
 import codeone.com.br.gympass.adpters.PhotoAdapter
 import codeone.com.br.gympass.fragments.MapsFragment
