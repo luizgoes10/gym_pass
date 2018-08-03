@@ -56,6 +56,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko:0.10.4"
 
     //Google Play Services
-    implementation 'com.google.android.gms:play-services-maps:15.0.1'
-    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.android.gms:play-services-maps:15.0.+'
+    implementation 'com.google.android.gms:play-services-location:15.0.+'
 }

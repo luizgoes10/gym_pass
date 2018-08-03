@@ -10,6 +10,10 @@
     tools:context=".views.MainActivity"
     tools:showIn="@layout/app_bar_details">
 
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,8 +52,9 @@
             card_view:cardCornerRadius="2dp"
             card_view:cardElevation="8dp"
             android:foreground="?attr/selectableItemBackground"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_margin="8dp"
             android:layout_gravity="top">
 
             <LinearLayout
@@ -62,7 +67,6 @@
                     android:id="@+id/frag_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     tools:layout="@layout/fragment_maps"/>
 
             </LinearLayout>
@@ -78,22 +82,6 @@
       <include layout="@layout/fragment_photos"/>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="323dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:background="#3333"/>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
