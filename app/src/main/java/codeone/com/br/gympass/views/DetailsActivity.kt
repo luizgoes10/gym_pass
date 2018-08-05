@@ -14,11 +14,9 @@ import android.view.View
 import android.widget.Toast
 import codeone.com.br.gympass.R
 import codeone.com.br.gympass.adpters.PhotoAdapter
+import codeone.com.br.gympass.adpters.ReviewsAdapter
 import codeone.com.br.gympass.fragments.MapsFragment
-import codeone.com.br.gympass.models.Company
-import codeone.com.br.gympass.models.CompanyDetails
-import codeone.com.br.gympass.models.Details
-import codeone.com.br.gympass.models.Photos
+import codeone.com.br.gympass.models.*
 import codeone.com.br.gympass.presenters.DetailsActivityPresenter
 import codeone.com.br.gympass.utils.BundlesConstants
 import com.squareup.picasso.Picasso
@@ -26,12 +24,14 @@ import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.app_bar_details.*
 import kotlinx.android.synthetic.main.content_details.*
 import kotlinx.android.synthetic.main.fragment_photos.*
+import kotlinx.android.synthetic.main.fragment_reviews.*
 
 class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, DetailsActivityPresenter.ViewCallBack {
 
     private val presenter:DetailsActivityPresenter by lazy { DetailsActivityPresenter(this) }
     private var adapter:PhotoAdapter? = null
     private var detail:Details? = null
+    private var adapterReviews:ReviewsAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,12 +120,16 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         tRatingDetails.text = "Avaliação: " + details.result.rating.toString()
         rbDetails.rating = details.result.rating.toFloat()
         rvPhotos.visibility = View.VISIBLE
-        if(adapter == null){
+        if(adapter == null && adapterReviews == null){
             adapter = PhotoAdapter(this,details.result.photos, onClick())
             rvPhotos.adapter = adapter
+            adapterReviews = ReviewsAdapter(this, details.result.reviews, onClickReviews())
+            rvReviews.adapter = adapterReviews
         }else{
             adapter?.setList(details.result.photos)
             adapter?.notifyDataSetChanged()
+            adapterReviews?.setListReviews(details.result.reviews)
+            adapterReviews?.notifyDataSetChanged()
         }
 
 
@@ -134,9 +138,14 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     private fun onClick():(Photos) -> Unit = {
         photos ->  presenter.clickedItem(photos)
     }
+    private fun onClickReviews():(Reviews) -> Unit = {
+         reviews ->  presenter.clickedItemReview(reviews)
+    }
     override fun setUpRecycler() {
         rvPhotos.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvPhotos.itemAnimator = DefaultItemAnimator()
+        rvReviews.layoutManager = LinearLayoutManager(this)
+        rvReviews.itemAnimator = DefaultItemAnimator()
     }
     override fun setUpToolbar(title: String) {
         supportActionBar?.title = title

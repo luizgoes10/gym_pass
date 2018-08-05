@@ -7,6 +7,7 @@ import codeone.com.br.gympass.api.services.ServiceApi
 import codeone.com.br.gympass.models.Company
 import codeone.com.br.gympass.models.Details
 import codeone.com.br.gympass.models.Photos
+import codeone.com.br.gympass.models.Reviews
 import codeone.com.br.gympass.utils.BundlesConstants
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -49,6 +50,10 @@ open class DetailsActivityPresenter(val viewCallBack:ViewCallBack) {
     fun clickedItem(photo: Photos) {
         val bundle = Bundle()
 
+    }
+
+    fun clickedItemReview(review:Reviews){
+        val bundle = Bundle()
     }
 
 

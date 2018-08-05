@@ -11,14 +11,77 @@
     card_view:cardElevation="8dp"
     android:foreground="?attr/selectableItemBackground"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="500dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tAuthorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tAuthorUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="20sp"/>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgPhotosUrl"
+                android:layout_margin="8dp"
+                android:layout_width="120dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="6dp"/>
+
+            <ProgressBar
+                android:id="@+id/pbPhotosUrl"
+                style="@android:style/Widget.ProgressBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:visibility="invisible"/>
+
+        </FrameLayout>
+
+        <RatingBar
+            android:id="@+id/rbAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:scaleX=".7"
+            android:scaleY=".7"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            android:max="5"/>
+
+        <TextView
+            android:id="@+id/tRelativeTimeDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
