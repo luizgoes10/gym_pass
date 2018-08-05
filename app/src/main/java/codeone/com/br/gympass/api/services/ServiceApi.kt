@@ -40,7 +40,7 @@ class ServiceApi {
         @GET("json")
         fun getDetails(
                 @Query("placeid")
-                placeId:String,
+                placeId:String?,
                 @Query("key")
                 key:String
         ):Call<Details>
@@ -70,7 +70,7 @@ class ServiceApi {
         }
         //Falta implementar details
         @Throws
-        fun getDetails(placeId: String, key: String)
+        fun getDetails(placeId: String?, key: String)
                 : Details {
             val service = createRetrofitService<Retrofit>(BaseUrl.URL_DETAIL)
             val execute = service.getDetails(placeId, key).execute()

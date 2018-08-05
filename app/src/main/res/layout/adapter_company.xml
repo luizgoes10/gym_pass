@@ -45,6 +45,15 @@
                 android:layout_gravity="center|center_vertical"
                 android:visibility="invisible"/>
 
+            <TextView
+                android:id="@+id/tImgError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textSize="12sp"
+                android:text="@string/image_error"
+                android:visibility="invisible"/>
+
         </FrameLayout>
 
         <TextView

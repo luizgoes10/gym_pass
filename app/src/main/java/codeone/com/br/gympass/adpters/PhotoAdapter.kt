@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import codeone.com.br.gympass.R
 import codeone.com.br.gympass.models.Photos
 import com.squareup.picasso.Picasso
@@ -38,6 +39,7 @@ class PhotoAdapter(var context:Context, var photo:List<Photos>, val onClick:(Pho
         val context = holder.itemView.context
         val photo = photo[position]
         holder.progressBarDetails.visibility = View.VISIBLE
+
         Picasso.with(context).load(photo.imgReference()).fit().into(holder.imgDetails,
                 object : com.squareup.picasso.Callback{
                     override fun onSuccess() {
@@ -49,6 +51,8 @@ class PhotoAdapter(var context:Context, var photo:List<Photos>, val onClick:(Pho
                     }
                 }
                 )
+
+
         holder.itemView.setOnClickListener { onClick(photo) }
     }
 

@@ -121,9 +121,15 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         rbDetails.rating = details.result.rating.toFloat()
         rvPhotos.visibility = View.VISIBLE
         if(adapter == null && adapterReviews == null){
-            adapter = PhotoAdapter(this,details.result.photos, onClick())
+            if(details.result.photos != null){
+               adapter = PhotoAdapter(this,details.result.photos, onClick())
+            }else{
+                tImgErrorPhotos.visibility = View.VISIBLE
+            }
             rvPhotos.adapter = adapter
-            adapterReviews = ReviewsAdapter(this, details.result.reviews, onClickReviews())
+            if(details.result.reviews != null){
+                adapterReviews = ReviewsAdapter(this, details.result.reviews, onClickReviews())
+            }
             rvReviews.adapter = adapterReviews
         }else{
             adapter?.setList(details.result.photos)
@@ -147,7 +153,7 @@ class DetailsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         rvReviews.layoutManager = LinearLayoutManager(this)
         rvReviews.itemAnimator = DefaultItemAnimator()
     }
-    override fun setUpToolbar(title: String) {
+    override fun setUpToolbar(title: String?) {
         supportActionBar?.title = title
     }
 

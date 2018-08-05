@@ -26,6 +26,7 @@ class CompanyAdpter(var context:Context, var company:List<Company>, val onClick:
         var photo:ImageView
         var progressBarAdapeter:ProgressBar
         var rbRating:RatingBar
+        var error:TextView
         var cardView:CardView
         init{
             tName = view.findViewById<TextView>(R.id.tName)
@@ -33,6 +34,7 @@ class CompanyAdpter(var context:Context, var company:List<Company>, val onClick:
             photo = view.findViewById<ImageView>(R.id.img)
             progressBarAdapeter = view.findViewById<ProgressBar>(R.id.pbAdapterCompany)
             rbRating = view.findViewById<RatingBar>(R.id.rbRatingMain)
+            error = view.findViewById<TextView>(R.id.tImgError)
             cardView = view.findViewById<CardView>(R.id.card_view_company)
         }
     }
@@ -49,9 +51,10 @@ class CompanyAdpter(var context:Context, var company:List<Company>, val onClick:
         val company = company[position]
         holder.tName.text = company.name
         holder.tRating.text = "Avaliação: " + company.rating.toString()
-        holder.rbRating.rating = company.rating.toFloat()
+        holder.rbRating.rating = company.rating!!.toFloat()
         holder.progressBarAdapeter.visibility = View.VISIBLE
-        Picasso.with(context).load(company.photos[0].imgReference()).fit().into(holder.photo,
+        if(company.photos != null){
+        Picasso.with(context).load(company.photos!![0].imgReference()).fit().into(holder.photo,
                 object : com.squareup.picasso.Callback{
                     override fun onSuccess() {
                         holder.progressBarAdapeter.visibility = View.GONE
@@ -61,6 +64,11 @@ class CompanyAdpter(var context:Context, var company:List<Company>, val onClick:
                         holder.progressBarAdapeter.visibility = View.GONE
                     }
                 })
+        }else{
+            holder.photo.visibility = View.INVISIBLE
+            holder.progressBarAdapeter.visibility = View.GONE
+            holder.error.visibility = View.VISIBLE
+        }
         holder.itemView.setOnClickListener { onClick(company) }
     }
 

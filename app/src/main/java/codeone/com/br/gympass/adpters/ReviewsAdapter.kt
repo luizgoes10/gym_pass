@@ -22,6 +22,7 @@ class ReviewsAdapter(var context: Context, var reviews:List<Reviews>, val onClic
         var authorUrl:TextView
         var language:TextView
         var profilePhotoUrl:ImageView
+        var tRatingReviews:TextView
         var rbAuthor:RatingBar
         var relativeTimeDescription:TextView
         var text:TextView
@@ -32,6 +33,7 @@ class ReviewsAdapter(var context: Context, var reviews:List<Reviews>, val onClic
             language = view.findViewById<TextView>(R.id.tLanguage)
             authorUrl = view.findViewById<TextView>(R.id.tAuthorUrl)
             profilePhotoUrl = view.findViewById<ImageView>(R.id.imgPhotosUrl)
+            tRatingReviews = view.findViewById<TextView>(R.id.tRatingReviews)
             rbAuthor = view.findViewById<RatingBar>(R.id.rbAuthor)
             relativeTimeDescription = view.findViewById<TextView>(R.id.tRelativeTimeDescription)
             text = view.findViewById<TextView>(R.id.tText)
@@ -68,6 +70,7 @@ class ReviewsAdapter(var context: Context, var reviews:List<Reviews>, val onClic
                     }
                 }
                 )
+        holder.tRatingReviews.text = "Avaliação: " + review.rating.toString()
         holder.rbAuthor.rating = review.rating.toFloat()
         holder.relativeTimeDescription.text = review.relativeTimeDescription
         holder.text.text = review.text

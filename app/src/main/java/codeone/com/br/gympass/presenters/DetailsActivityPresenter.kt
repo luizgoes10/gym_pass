@@ -21,7 +21,7 @@ open class DetailsActivityPresenter(val viewCallBack:ViewCallBack) {
     interface ViewCallBack{
 
         fun setDetails(details: Details)
-        fun setUpToolbar(title:String)
+        fun setUpToolbar(title:String?)
         fun setUpRecycler()
         fun setMapDetails(extras: Bundle)
     }
